@@ -1,0 +1,38 @@
+1. Family tree
+male(john).
+male(mike).
+male(david).
+female(lisa).
+female(susan).
+female(anna).
+
+parent(john,mike).
+parent(john,lisa).
+parent(susan,mike).
+parent(susan,lisa).
+parent(mike,david).
+parent(anna,david).
+
+father(F,C):-male(F),parent(F,C).
+mother(M,C):-female(M),parent(M,C).
+
+grandfather(GF,C):-male(GF),parent(GF,P),parent(P,C).
+grandmother(GM,C):-male(GM),parent(GM,P),parent(P,C).
+
+sibling(X,Y):- parent(P,X),parent(P,Y),X\=Y.
+
+
+2. Student details
+student(rahul,math,85).
+student(sita,math,92).
+student(amit,science,78).
+student(rina,science,89).
+student(karan,english,76).
+student(sita,english,88).
+
+high_score(Name):-student(Name,_,Marks),Marks>80.
+
+math_student(Name):-student(Name,math,_).
+
+topper(Subject,Name,Marks):-
+	student(Name,Subject,Marks), \+(student(_,Subject,Marks2),Marks2>Marks).
